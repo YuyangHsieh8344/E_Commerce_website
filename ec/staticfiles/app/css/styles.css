@@ -1,0 +1,17 @@
+
+/* styles.css */
+
+.region-content {
+    margin-bottom: 20px; /* Add some space below each image section */
+}
+
+.region img {
+    width: 100%; /* Ensure images fit within their column */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.region-name {
+    font-size: 18px; /* Adjust font size as needed */
+    color: rgb(6, 6, 6); /* Ensure text color is black */
+    margin-top: 10px; /* Space between image and text */
+}

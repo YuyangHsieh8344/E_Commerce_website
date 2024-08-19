@@ -1,0 +1,32 @@
+{% extends "app/base.html" %}
+{% load static %}
+{% block title %}Contact{% endblock title %}
+
+{% block main-content %}
+<div class="container mt-3">
+    <br></br>
+    <h2 class="text-center text-dark">Contact Me</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="contact-info d-flex flex-column align-items-center">
+                <p class="fs-4 text-center">
+                    <span class="fw-bold">Email:</span><br>
+                    <a href="mailto:yuyang53445@gmail.com" class="text-decoration-none">yuyang53445@gmail.com</a>
+                </p>
+                <p class="fs-4 text-center">
+                    <span class="fw-bold">LinkedIn:</span><br>
+                    <a href="https://www.linkedin.com/in/hsieh-leo-01b00717a/" target="_blank" class="text-decoration-none">LinkedIn Profile</a>
+                </p>
+                <p class="fs-4 text-center">
+                    <span class="fw-bold">GitHub:</span><br>
+                    <a href="https://github.com/YuyangHsieh8344" target="_blank" class="text-decoration-none">GitHub Profile</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Spacer div to push footer down -->
+<div class="flex-grow-1"></div>
+
+{% endblock main-content %}

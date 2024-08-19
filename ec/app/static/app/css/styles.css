@@ -1,0 +1,84 @@
+
+/* styles.css */
+
+
+main {
+    flex: 1; /* Make the main content take up all available space */
+}
+
+body {
+    font-family: 'Cinzel', serif;
+    color: #000000; /* Adjust text color as needed */
+ 
+}
+
+/* Apply specific styling to headings */
+h1, h2, h3 {
+    font-family: 'Cinzel', serif;
+    font-weight: bold;
+}
+
+.dropdown-item{
+    font-family: 'Cinzel', serif;
+}
+
+.nav-item{
+    font-family: 'Cinzel', serif;
+}
+
+
+
+
+
+
+/* ------------------------------------------------------------------------------------*/
+.region-content {
+    margin-bottom: 20px; /* Add some space below each image section */
+    
+}
+
+.region img {
+    width: 100%; /* Ensure images fit within their column */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.region-name {
+    font-family: 'Cinzel', serif;
+    font-size: 18px; /* Adjust font size as needed */
+    color: rgb(0, 0, 0); /* Ensure text color is black */
+    margin-top: 10px; /* Space between image and text */
+    margin-bottom: 15px;
+    margin: 0 auto;
+
+}
+
+.region{
+    /* Specific styles for Mondstadt */
+        /* Specific styles for Liyue */
+        background-color: white;
+        background-image: linear-gradient(#fff7ef, white);
+        background-image: -webkit-linear-gradient(#fff7ef,white);
+        background-image: -moz-linear-gradient(#fff7ef, white);
+        background-image: -o-linear-gradient(#fff7ef,white);
+        padding: 50px, 40px;
+        border: 1px solid #efe8e1;
+        padding-bottom: 10px;
+}
+
+
+
+.no-underline {
+    text-decoration: none;
+    color: inherit; /* Ensure the text color is inherited from its parent */
+}
+
+.no-underline:hover {
+    color: #007bff; /* Change to your desired hover color */
+}
+
+/*-------------------------------------------------------------------------------------------*/
+/* contact.html */
+
+
+
+

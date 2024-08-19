@@ -1,0 +1,48 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block title %}Category{% endblock title %}
+
+{# Main content block for the category page #}
+{% block main-content %}
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-sm-3">
+                {# List of categories #}
+                <div class="list-group">
+                    {% for val in title %}
+                        {# this is under Ex: Liyue -> Hutao1 #}
+                        <a href="{% url 'category-title' val.title %}" class="list-group-item list-group-item-action" aria-current="true" style="font-family: 'Cinzel', serif;">
+                            {{ val.title }}
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="col-sm-9">
+                <div class="row">
+                    {# List of products in the selected category #}
+                    {% for prod in product %}
+                        <div class="col-md-6 text-center mb-4">
+                            {# Placeholder link around each product (replace '#' with actual product links) #}
+                            <a href="{% url 'product-detail' prod.id %}" class="btn">
+                                <div>
+                                    <img src="{{ prod.product_image.url }}" class="img-fluid" alt="{{ prod.title }}" style="max-width: 100%; height: auto;"/>
+                                    {# Product title #}
+                                    <div class="fw-bold">{{ prod.title }}</div>
+                                    {# Display discounted price and original price #}
+                                    <div class="fw-bold text-danger">
+                                        ${{ prod.discounted_price }}/-
+                                        <small class="fw-light text-decoration-line-through">{{ prod.selling_price }}</small>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% empty %}
+                    <p>No products found in this category.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock main-content %}

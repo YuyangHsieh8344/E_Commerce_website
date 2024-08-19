@@ -1,0 +1,49 @@
+<!-- templates/app/payment_success.html -->
+{% extends "app/base.html" %}
+{% block title %}Payment Successful{% endblock title %}
+
+{% block main-content %}
+<div class="container mt-5">
+    <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">Payment Successful!</h4>
+        <p>Thank you for your payment. Your transaction has been completed successfully.</p>
+        <hr>
+        <p class="mb-0">You will receive a confirmation email shortly. If you have any questions, feel free to contact our support team.</p>
+    </div>
+    
+    <div class="row justify-content-center">
+        <div class="col-md-3 text-center">
+            <div class="gif-container mb-2">
+                <!-- Tenor GIF Embed with fixed size -->
+                <div class="tenor-gif-embed" data-postid="12138829388134759943" data-share-method="host" data-aspect-ratio="1" data-width="100%"><a href="https://tenor.com/view/hu-tao-genshin-impact-hu-tao-genshin-impact-liyue-wangsheng-funeral-parlor-gif-12138829388134759943">Hu Tao Genshin Impact Sticker</a>from <a href="https://tenor.com/search/hu+tao-stickers">Hu Tao Stickers</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+            </div>
+            
+            <div class="text-center">
+                <a href="{% url 'home' %}" class="btn btn-dark">Return to Home</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .tenor-gif-embed iframe {
+        height: 200px !important;
+        pointer-events: none;
+    }
+    
+    .gif-container {
+        display: flex;
+        justify-content: center;
+    }
+</style>
+
+<script>
+    // Remove title attribute from iframe to prevent hover tooltip
+    document.addEventListener("DOMContentLoaded", function() {
+        const tenorIframe = document.querySelector(".tenor-gif-embed iframe");
+        if (tenorIframe) {
+            tenorIframe.removeAttribute("title");
+        }
+    });
+</script>
+{% endblock main-content %}

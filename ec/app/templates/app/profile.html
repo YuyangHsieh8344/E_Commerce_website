@@ -1,0 +1,92 @@
+{% extends "app/base.html" %}
+{% load static %}
+{% block title %}Profile{% endblock title %}
+
+{% block main-content %}
+<div class="container my-5">
+    <div class="row">
+        {% if user.is_authenticated %}
+            <h3>Welcome <span class="text-capitalize">{{ request.user.username }}</span></h3>
+            <div class="col-sm-2 border-end nav-buttons">
+                <ul class="list-unstyled">
+                    <li class="d-grid"><a href="{% url 'profile' %}" class="btn"><b> Profile </b></a></li>
+                    <li class="d-grid"><a href="{% url 'edit-profile' %}" class="btn"><b> Edit Profile </b></a></li>
+                </ul>
+            </div>
+            <div class="col-sm-8 offset-sm-1">
+                {% if customer %}
+                    <h4>Profile Details</h4>
+                    <p><strong>Name:</strong> {{ customer.name }}</p>
+                    <p><strong>Address:</strong> {{ customer.address }}</p>
+                    <p><strong>City:</strong> {{ customer.city }}</p>
+                    <p><strong>Mobile:</strong> {{ customer.mobile }}</p>
+                    <p><strong>State:</strong> {{ customer.state }}</p>
+                    <p><strong>Zip Code:</strong> {{ customer.zipcode }}</p>
+                {% else %}
+                    <p>No profile information available. Please <a href="{% url 'edit-profile' %}">create your profile</a>.</p>
+
+
+                    <div class="my-0">
+                        <!-- Container to control the positioning of the GIF -->
+                        <div class="gif-container">
+                            <!-- Tenor GIF Embed with fixed size -->
+                            <div class="tenor-gif-embed" data-postid="7339781950897265481" data-share-method="host" data-width="300">
+                                <a href="https://tenor.com/view/wanderer-genshin-impact-wanderer-genshin-impact-sumeru-snezhnaya-gif-7339781950897265481">Wanderer Genshin Impact Sticker</a> 
+                                from <a href="https://tenor.com/search/wanderer-stickers">Wanderer Stickers</a>
+                            </div> 
+                            <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+                        </div>
+                        <style>
+                            .tenor-gif-embed iframe {
+                                height: 200px !important;
+                                pointer-events: none;
+                            }
+                    
+                            .gif-container {
+                                margin-left: -450px; /* Adjust this value to move the GIF to the left */
+                            }
+                        </style>
+                    
+                        <script>
+                            // Remove title attribute from iframe to prevent hover tooltip
+                            document.addEventListener("DOMContentLoaded", function() {
+                                const tenorIframe = document.querySelector(".tenor-gif-embed iframe");
+                                if (tenorIframe) {
+                                    tenorIframe.removeAttribute("title");
+                                }
+                            });
+                        </script>
+                    </div>
+                    
+
+                {% endif %}
+            </div>
+        {% else %}
+            <div class="col-sm-12 text-center">
+                <h3>Please log in to view your profile.</h3>
+                <p><a href="{% url 'login' %}" class="btn btn-primary">Login</a></p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Add styles here -->
+ <style>
+    .nav-buttons .btn {
+        background-color: #f8f9fa; /* Initial background color */
+        color: rgb(0, 0, 0); /* Initial text color */
+        {% comment %} border: 1px solid #343a40; /* Border color */
+        transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for hover effects */ {% endcomment %}
+}
+
+.nav-buttons .btn:hover {
+        background-color: #070707; /* Background color on hover */
+        color: #f8f9fa; /* Text color on hover */
+        border-color: #5a6268; /* Border color on hover */
+}
+ </style>
+
+{% endblock main-content %}
+
+
+

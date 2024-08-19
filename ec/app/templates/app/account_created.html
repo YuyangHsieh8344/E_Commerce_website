@@ -1,0 +1,39 @@
+{% extends "app/base.html" %}
+{% load static %}
+{% block title %}Account Created{% endblock title %}
+
+
+{% block main-content %}
+<div class="container mt-5">
+    <h2 class="text-center">Congratulations!</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-3 text-center">
+            <p class="text-center">Your account has been created successfully.. You can now <a href="{% url 'login' %}">log in</a> with your new password.</p>
+            <div class="my-1">
+                <!-- Tenor GIF Embed with fixed size -->
+                <div class="tenor-gif-embed" data-postid="5710118738560779967" data-share-method="host" data-aspect-ratio="1" data-width="100%"><a href="https://tenor.com/view/venti-genshin-impact-venti-genshin-impact-mondstadt-the-seven-gif-5710118738560779967">Venti Genshin Impact Sticker</a>from <a href="https://tenor.com/search/venti-stickers">Venti Stickers</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+
+
+                <style>
+                    .tenor-gif-embed iframe {
+                        height: 200px !important;
+                        pointer-events: none;
+                    }
+                </style>
+
+                <script>
+                    // Remove title attribute from iframe to prevent hover tooltip
+                    document.addEventListener("DOMContentLoaded", function() {
+                        const tenorIframe = document.querySelector(".tenor-gif-embed iframe");
+                        if (tenorIframe) {
+                            tenorIframe.removeAttribute("title");
+                        }
+                    });
+                </script>
+                
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock main-content %}

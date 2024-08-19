@@ -1,0 +1,19 @@
+<!-- templates/app/payment_failed.html -->
+{% extends "app/base.html" %}
+{% block title %}Payment Failed{% endblock title %}
+
+{% block main-content %}
+<div class="container mt-5">
+    <div class="alert alert-danger" role="alert">
+        {{ message }}
+        <h4 class="alert-heading">Payment Failed</h4>
+        <p>We encountered an issue while processing your payment. Please try again.</p>
+        <hr>
+        <p class="mb-0">If the problem persists, contact our support team for assistance.</p>
+    </div>
+    <div class="text-center mt-4">
+        <a href="{% url 'checkout' %}" class="btn btn-primary">Try Again</a>
+        <a href="{% url 'home' %}" class="btn btn-secondary">Return to Home</a>
+    </div>
+</div>
+{% endblock main-content %}

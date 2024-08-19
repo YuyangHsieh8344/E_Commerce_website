@@ -1,0 +1,208 @@
+Flask vs Django
+---------------
+Flask
+- Not as powerful as Django.
+- A lot faster than Django.
+
+Flask Setup
+-----------
+1. Install Flask and extensions:
+   pip install flask
+   pip install flask-login
+   pip install flask-sqlalchemy
+
+2. Set up and run the Flask application:
+   set FLASK_APP=app.py
+   flask run
+
+Flask Development
+-----------------
+- Prettier: An extension for auto-formatting code.
+- Template Structure:
+  - Use render_template in views.py to render templates like home.html.
+  - auth.py handles login functionality.
+  - Use {% block content %} {% endblock %} to define overridable blocks in templates.
+  - <br />: Break line in HTML.
+
+Flask App Structure
+-------------------
+- __init__.py: Initializes the Flask app, configures it, and sets up the database.
+- config.py: Contains configuration settings like secret key and database URI.
+- models.py: Defines database models using SQLAlchemy.
+- auth.py: Handles user authentication (login, logout, registration).
+- views.py: Defines routes and view functions for different parts of the site.
+- Templates: Use Jinja2 for rendering HTML. base.html is a base template.
+
+HTTP Requests in Flask
+----------------------
+- GET request: Retrieve information.
+- POST request: Update or create something.
+- methods=['GET', 'POST']: Specifies allowed methods for a route.
+
+Setting Up Database
+-------------------
+- Import SQLAlchemy and configure the app:
+  from flask_sqlalchemy import SQLAlchemy
+  from os import path
+
+  db = SQLAlchemy()
+  DB_NAME = "database.db"
+  app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
+  db.init_app(app)
+
+- models.py: Define database models with db.Column().
+
+Routes and Views
+----------------
+- /products: Product listing.
+- product_detail: Detailed view of a product.
+- product_list: List of products.
+
+
+
+
+
+-----------------------------------------------------------------------
+Anaconda  
+set up Django env
+1. create -> django2 
+
+2. pip list 
+
+3. conda install -c conda-forge autopep8 django django-crispy-forms django-bootstrap4 furl pillow pylint sqlparse
+
+
+4. django-admin startproject ec
+
+5. cd ./ec
+python manage.py runserver
+(this line to start the server)
+
+6. python manage.py startapp app
+
+
+7. static -> setting.py
+
+8. index.html 
+
+! => basic template
+
+ Ctrl + Shift + P  => change language mode 
+Ctrl + Shift + x => open extension => Django 
+=> bottom right HTML 
+
+9. models.py 
+
+python manage.py makemigrations
+python manage.py migrate
+python manage.py createsuperuser
+
+Username: Yuyang
+Email address yuyang53445@gmail.com
+Password:86n7kB9tC
+
+Username: Leosama
+Email address leohsieh9876@gmail.com
+Password: B8njvc1H2
+
+Username: test1
+Email address yuyang83446@gmail.com
+Password: oNRPaB23f
+
+
+http://localhost:8000/admin/login/?next=/admin/
+
+10. category.html
+
+views.py
+
+from django.http import HttpResponse
+from urllib import request
+from django.views import View
+
+
+class CategoryView(View):
+    def get(self, request):
+        return render(request, "app/category.html")
+
+product image 1000x1250
+
+11. productdetail.html
+
+views.py
+urls.py
+
+12. forms.py
+
+registration user 
+
+
+13.add to cart 
+   a. models.py
+python manage.py makemigrations
+python manage.py migrate
+   b. urls.py
+   c. admin.py
+
+14. + - quantity shop items 
+ctrl + shift + R in inspect hard refresh
+-----------------------------------------------------------------------
+CSS fixed 
+setting.py
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # Define a directory to collect static files
+
+
+base.html
+<link rel="stylesheet" href="{% static 'app/css/styles.css' %}?v=1.0">
+-----------------------------------------------------------------------
+External Resources
+------------------
+- Bootstrap: 
+https://getbootstrap.com/docs/5.3/getting-started/introduction/
+- jQuery CDN: 
+https://cdnjs.com/libraries/jquery
+- Image Resizing: 
+https://www.adobe.com/express/feature/image/resize
+- Background Removal: 
+https://www.remove.bg/upload
+- Image Cropping: 
+https://www.fotor.com/photo-editor-app/editor/basic
+- GIFs: 
+https://tenor.com/view/furina-genshin-impact-furina-de-fontaine-gif-9146456002059790473
+
+-Gnerate Email
+https://generator.email
+
+paypal sandbox (fake bank account for testing purpose)
+https://www.sandbox.paypal.com/us/home
+
+Paypal API credentials 
+https://developer.paypal.com/dashboard/applications/edit/SB:QVNWVUhpSE5yeXdFcGJKVHQ3YWxNNFE0NFBKQXg5MGFPenlqQ05ZNXJ2YkZGd3FnRHJNcHpudjJNa1ZIQm9zZTVFS1M5Z05TV2RPX1U2dW8=
+
+payment=gateway
+4:36:43
+
+views.py (payment)
+4:47:25 
+
+
+
+views.py
+3:54:06
+
+adding background text box
+<div class="bg-light p-4 rounded shadow-sm">
+      <p class="fs-4 text-center">Welcome </p>
+</div>
+
+
+
+fake email
+personal
+zircoolblog@fotokults.de
+*.+-P=~rb0CE
+
+business
+oliferak@gmail.com
+8Q??+?CPaF_M

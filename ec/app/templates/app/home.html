@@ -1,0 +1,151 @@
+{% extends "app/base.html" %}
+{% load static %}
+{% block title %}Home{% endblock title %}
+
+<!-- Banner Slider block -->
+{% block banner-slider %}
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <!-- Carousel Indicators -->
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 5"></button>
+    </div>
+
+    <!-- Carousel Inner -->
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="{% static 'app/images/banner/a1.jpg' %}" class="d-block w-100" alt="banner image">
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'app/images/banner/a2.jpg' %}" class="d-block w-100" alt="banner image">
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'app/images/banner/a3.jpg' %}" class="d-block w-100" alt="banner image">
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'app/images/banner/a4.jpg' %}" class="d-block w-100" alt="banner image">
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'app/images/banner/a5.jpg' %}" class="d-block w-100" alt="banner image">
+        </div>
+    </div>
+
+    <!-- Carousel Controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+{% endblock banner-slider %}
+
+<!-- Information Block -->
+{% block information %}
+<div class="container">
+    <div class="row bg-dark text-center p-5 text-white border-bottom shadow">
+        <h1>Products</h1>
+        <small class="fs-5">Genshin's Art is a dedicated platform showcasing the rich and diverse visual art inspired by the game Genshin Impact, focusing on the unique styles and cultural influences of its five distinct regions. In addition to Genshin Impact, the website also features a curated collection of concept art from other popular games, offering a broad spectrum of artistic styles and genres. Visitors can delve into the creative processes of various artists, gaining insights into the development of iconic game worlds and characters. Whether you're a fan of the fantasy aesthetics of Genshin Impact or curious about the art direction of other games, Genshin's Art is the perfect destination for visual inspiration and appreciation.</small>
+    </div>
+</div>
+<br></br>
+{% endblock information %}
+
+<!-- Main Content Block -->
+{% block main-content %}
+<div class="container">
+    <h2 class="text-center">Welcome to Yuyang's Gallery</h2>
+    <br><br>
+
+    <div class="row">
+        <!-- Mondstadt Section -->
+        <div class="col-md-6 col-sm-6 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.6s">
+            <div class="region mondstadt">
+                <a href="{% url 'category' 'MO' %}" class="no-underline">
+                    <div class="region-content text-center">
+                        <img src="{% static 'app/images/product/mondstadt1.png' %}" class="img-responsive center-block" alt="Mondstadt">
+                        <p class="region-name">Mondstadt</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Liyue Section -->
+        <div class="col-md-6 col-sm-6 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.8s">
+            <div class="region liyue">
+                <a href="{% url 'category' 'LI' %}" class="no-underline">
+                    <div class="region-content text-center">
+                        <img src="{% static 'app/images/product/liyue1.png' %}" class="img-responsive center-block" alt="Liyue">
+                        <p class="region-name">Liyue</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Inazuma Section -->
+        <div class="col-md-6 col-sm-6 wow fadeInUp" data-wow-duration="1s" data-wow-delay="1s">
+            <div class="region inazuma">
+                <a href="{% url 'category' 'IN' %}" class="no-underline">
+                    <div class="region-content text-center">
+                        <img src="{% static 'app/images/product/inazuma1.png' %}" class="img-responsive center-block" alt="Inazuma">
+                        <p class="region-name">Inazuma</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Sumeru Section -->
+        <div class="col-md-6 col-sm-6 wow fadeInUp" data-wow-duration="1s" data-wow-delay="1.2s">
+            <div class="region sumeru">
+                <a href="{% url 'category' 'SU' %}" class="no-underline">
+                    <div class="region-content text-center">
+                        <img src="{% static 'app/images/product/sumeru1.png' %}" class="img-responsive center-block" alt="Sumeru">
+                        <p class="region-name">Sumeru</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Fontaine Section -->
+        <div class="col-md-6 col-sm-6 wow fadeInUp" data-wow-duration="1s" data-wow-delay="1.4s">
+            <div class="region fontaine">
+                <a href="{% url 'category' 'FO' %}" class="no-underline">
+                    <div class="region-content text-center">
+                        <img src="{% static 'app/images/product/fontaine1.png' %}" class="img-responsive center-block" alt="Fontaine">
+                        <p class="region-name">Fontaine</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    
+
+        <!-- other Section -->
+        <div class="col-md-6 col-sm-6 wow fadeInUp" data-wow-duration="1s" data-wow-delay="1.6s">
+            <div class="region other-game">
+                <a href="{% url 'category' 'OG' %}" class="no-underline">
+                    <div class="region-content text-center">
+                        <img src="{% static 'app/images/product/othergame4.png' %}" class="img-responsive center-block" alt="Other">
+                        <p class="region-name">Other Games</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+<br></br>
+{% endblock main-content %}

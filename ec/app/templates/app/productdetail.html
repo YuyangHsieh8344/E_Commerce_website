@@ -1,0 +1,71 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block title %}Product Detail{% endblock title %}
+
+{% block main-content %}
+    <div class="container">
+        <div class="row flex justify-content-between">
+            <div class="col-lg-6 mt-5">
+                {% if product.product_image %}
+                    <img src="{{ product.product_image.url }}" class="img-fluid" alt="{{ product.title }}" style="max-width: 100%; height: auto;">
+                {% else %}
+                    <p>No image available</p>
+                {% endif %}
+            </div>
+
+            <div class="col-lg-5 mt-5">
+                <h1>{{ product.title }}</h1>
+                <h5>${{ product.discounted_price }}</h5>
+                <small class="text-muted"><del>${{ product.selling_price }}</del></small>
+                <br><br>
+                <h4>Product Features</h4>
+                <ul>
+                    <li>{{ product.description }}</li>
+                    <li>{{ product.prodapp }}</li>
+                </ul>
+
+                <!-- Add to Cart Form -->
+                <form action="{% url 'add_to_cart' %}" method="post" class="d-inline">
+                    {% csrf_token %}
+                    <input type="hidden" name="prod_id" value="{{ product.id }}">
+
+                    <input type="hidden" name="category_id" value="{{ category.id }}">
+                    
+                    <button type="submit" class="btn btn-danger px-5 py-2">Add to Cart</button>
+                </form>
+
+                <a href="{% url 'show_cart' %}" class="btn btn-dark shadow px-5 py-2">View Cart</a>
+
+
+                <br><br>
+                <!-- Back Button -->
+                <a href="{{ referer_url }}" class="btn btn-dark shadow px-5 py-2">Back to Category</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notifications -->
+    {% if messages %}
+        <div id="notification-container">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <style>
+        #notification-container .alert {
+            opacity: 1;
+            transition: opacity 0.5s ease-out;
+        }
+        
+        #notification-container .alert.fade {
+            opacity: 0;
+        }
+    </style>
+    
+{% endblock main-content %}

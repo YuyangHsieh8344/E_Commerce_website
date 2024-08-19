@@ -1,0 +1,108 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block title %}Checkout{% endblock title %}
+
+{% block main-content %}
+<div class="container">
+
+    <!-- Display any error messages, typically from form validation or payment issues -->
+    {% if messages %}
+        {% for msg in messages %}
+        <div class="alert alert-danger" role="alert">
+            {{ msg }}
+        </div>
+        {% endfor %}
+    {% endif %}
+
+    <div class="row mt-5">
+        <!-- Order Summary Section -->
+        <div class="col-sm-6">
+            <h4>Order Summary</h4>
+            <hr>
+            {% for item in cart_items %}
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <h5>Product: {{ item.product.title }}</h5>
+                        <p>Quantity: {{ item.quantity }}</p>
+                        <p class="fw-bold">Price: ${{ item.product.discounted_price }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+            <p class="fw-bold">Total Cost + Free Shipping = ${{ totalamount }}</p>
+            <small>Terms and Conditions: Items will be sent to your email after checkout. No returns allowed.</small>
+        </div>
+
+        <!-- Shipping Address Selection and Payment Section -->
+        <div class="col-sm-4 offset-sm-1">
+            <h4>Select Shipping Address</h4>
+            <hr>
+
+            <form method="post" id="myform">
+                {% csrf_token %}
+                
+                <!-- Display available shipping addresses -->
+                {% for ad in add %}
+                    <div class="card">
+                        <div class="card-body">
+                            <h5>{{ ad.name }}</h5>
+                            <p>Mobile: {{ ad.mobile }}</p>
+                            <p>{{ ad.address }}, {{ ad.city }}, {{ ad.state }} - {{ ad.zipcode }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+
+                <!-- Display total amount (readonly input field) -->
+                <div class="form-check mt-2 mb-3">
+                    <label for="totalamount" class="form-label">Total Amount</label>
+                    <input type="number" class="form-control" name="totalamount" value="{{ totalamount }}" readonly>
+                </div>
+
+                <!-- PayPal payment button -->
+                <div id="paypal-button-container" class="text-end mt-3"></div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock main-content %}
+
+{% block payment-gateway %}
+<script src="https://www.paypal.com/sdk/js?client-id={{ PAYPAL_CLIENT_ID }}&currency=USD"></script>
+<script>
+    paypal.Buttons({
+
+        style: {
+            color:  'white',
+            shape:  'pill',
+            label:  'pay',
+            height: 40
+        },
+        // Set up the transaction
+        createOrder: function(data, actions) {
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: '{{ totalamount }}' // Total amount to be paid
+                    }
+                }]
+            });
+        },
+    
+
+        onApprove: function(data, actions) {
+            return actions.order.capture().then(function(details) {
+                // Redirect to the payment success page on successful capture
+                window.location.href = "{% url 'payment_success' %}";
+            });
+        },
+    
+        // Handle payment failure
+        onError: function(err) {
+            console.error('Payment failed', err);
+            // Redirect to the payment failure page if there's an error
+            window.location.href = "{% url 'payment_failed' %}";
+        }
+    }).render('#paypal-button-container');
+
+</script>
+{% endblock payment-gateway %}
