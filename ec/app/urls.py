@@ -62,7 +62,7 @@ urlpatterns = [
     path('cart/', views.show_cart, name='show_cart'),
 
     #checkout
-   path('checkout/', views.CheckoutView.as_view(), name='checkout'),
+    path('checkout/', views.CheckoutView.as_view(), name='checkout'),
 
     path('pluscart/', views.plus_cart),
 
@@ -70,17 +70,14 @@ urlpatterns = [
 
     path('removecart/', views.remove_cart),
 
+    #path('app/orderplaced/', views.OrderPlacedView.as_view(), name='order_placed'),
 
-    # path('execute-payment/', ExecutePaymentView.as_view(), name='execute_payment'),
-
-    # path('payment-success/', TemplateView.as_view(template_name='app/payment_success.html'), name='payment_success'),
-
-    # path('payment-failed/', TemplateView.as_view(template_name='app/payment_failed.html'), name='payment_failed'),
+    path('payment-complete/', views.payment_complete, name='payment_complete'),
 
     path('payment-success/', PaymentSuccessView.as_view(), name='payment_success'),
     path('payment-failed/', PaymentFailedView.as_view(), name='payment_failed'),
    
-   path('', include('paypal.standard.ipn.urls')),
+    path('', include('paypal.standard.ipn.urls')),
 ]
 
 if settings.DEBUG:

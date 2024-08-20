@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.views import View
 from django.contrib import messages
-from .models import OrderPlaced, Product, Customer, Cart
+from .models import  OrderPlaced, Payment, Product, Customer, Cart
 from .forms import CustomerRegistrationForm, CustomerProfileForm
 
 #added area
@@ -18,6 +18,8 @@ from django.db.models import Q
 from django.conf import settings
 import paypalrestsdk
 
+from django.http import JsonResponse
+import json
 
 from django.views.generic import TemplateView
 
@@ -264,30 +266,6 @@ def remove_cart(request):
         return JsonResponse(data)
     
 
-# class CheckoutView(View):
-#     def get(self, request):
-#         user = request.user
-#         cart_items = Cart.objects.filter(user=user)
-#         famount = 0
-
-#         for p in cart_items:
-#             value = p.quantity * p.product.discounted_price
-#             famount += value
-
-#         totalamount = famount
-#         add = Customer.objects.filter(user=user)
-        
-#         # Pass the PayPal client ID from settings to the template
-#         paypal_client_id = settings.PAYPAL_CLIENT_ID
-
-#         return render(request, 'app/checkout.html', {
-#             'cart_items': cart_items,
-#             'totalamount': totalamount,
-#             'add': add,
-#             'PAYPAL_CLIENT_ID': paypal_client_id,
-#         })
-
-
 class CheckoutView(View):
     def get(self, request):
         user = request.user
@@ -310,46 +288,52 @@ class CheckoutView(View):
             'PAYPAL_CLIENT_ID': paypal_client_id,
         })
 
-# class ExecutePaymentView(View):
-#     def get(self, request):
-#         paypalrestsdk.configure({
-#             "mode": settings.PAYPAL_MODE,
-#             "client_id": settings.PAYPAL_CLIENT_ID,
-#             "client_secret": settings.PAYPAL_CLIENT_SECRET
-#         })
-
-#         order_id = request.GET.get('orderID')
-#         if not order_id:
-#             print("Order ID not provided.")
-#             return redirect(reverse('payment_failed'))
-
-#         try:
-#             # Use the PayPal Order API to find and capture the order
-#             order = paypalrestsdk.Order.find(order_id)
-#             if order.capture():
-#                 # Store the order details in your OrderPlaced model (if needed)
-#                 cart_items = Cart.objects.filter(user=request.user)
-#                 for item in cart_items:
-#                     OrderPlaced.objects.create(
-#                         user=request.user,
-#                         customer=item.customer,
-#                         product=item.product,
-#                         quantity=item.quantity,
-#                         payment=order_id  # Save the PayPal order ID in your model
-#                     )
-#                 cart_items.delete()  # Clear the cart after the order is placed
-#                 return redirect(reverse('payment_success'))
-#             else:
-#                 print(f"Order capture failed: {order.error}")
-#                 return redirect(reverse('payment_failed'))
-#         except Exception as e:
-#             print(f"Exception during order capture: {e}")
-#             return redirect(reverse('payment_failed'))
-
-
         
 class PaymentSuccessView(TemplateView):
     template_name = 'app/payment_success.html'
 
 class PaymentFailedView(TemplateView):
     template_name = 'app/payment_failed.html'
+
+
+@login_required
+def payment_complete(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            total_amount = data.get('totalAmount')
+            payment_id = data.get('paymentId')  # Assuming you receive this from the payment gateway
+
+            # Create a Payment instance
+            payment = Payment.objects.create(
+                user=request.user,
+                amount=total_amount,
+                paypal_payment_id=payment_id,
+                paid=True
+            )
+
+            # Get all cart items for the user
+            cart_items = Cart.objects.filter(user=request.user)
+
+            # Create OrderPlaced instances for each cart item
+            for item in cart_items:
+                OrderPlaced.objects.create(
+                    user=request.user,
+                    customer=item.product.customer,  # Assuming you have a way to get customer for the product
+                    product=item.product,
+                    quantity=item.quantity,
+                    payment=payment
+                )
+
+            # Clear the user's cart
+            cart_items.delete()
+
+            # Redirect to payment success page
+            return render(request, 'payment_success.html', {'payment': payment})
+
+        except Exception as e:
+            # If any error occurs during the process, redirect to payment failed page
+            return render(request, 'payment_failed.html', {'error': str(e)})
+
+    # If the request method is not POST, redirect to payment failed page
+    return render(request, 'payment_failed.html', {'error': 'Invalid request method'})

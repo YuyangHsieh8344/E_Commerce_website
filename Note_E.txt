@@ -97,6 +97,7 @@ python manage.py makemigrations
 python manage.py migrate
 python manage.py createsuperuser
 
+superuser
 Username: Yuyang
 Email address yuyang53445@gmail.com
 Password:86n7kB9tC
@@ -196,7 +197,8 @@ adding background text box
       <p class="fs-4 text-center">Welcome </p>
 </div>
 
-
+rm -Force app/migrations/0*
+python manage.py migrate app zero
 
 fake email
 personal
